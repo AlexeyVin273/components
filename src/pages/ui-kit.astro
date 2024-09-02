@@ -1,0 +1,51 @@
+---
+import Container from '@components/Container/Container'
+import Modal from '@components/Modal/Modal'
+import UIKitLayout from '@layouts/UI-kit/UI-kit'
+import Button from '@ui/Button/Button'
+import Title from '@ui/Title/Title'
+---
+
+<UIKitLayout>
+  <div class="ui">
+    <Container>
+      <h1 class="ui-title">UI-kit</h1>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Заголовки</h2>
+        <Title text="Title size=`xl`" as="h1" size="xl" />
+        <Title text="Title size=`lg`" as="h2" size="lg" />
+        <Title text="Title size=`md`" as="h3" size="md" />
+        <Title text="Title size=`sm`" as="p" size="sm" />
+        <Title
+          text="Title size=`sm` --uppercase"
+          as="p"
+          size="sm"
+          mods={['uppercase']}
+        />
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Кнопки</h2>
+        <Button text="Классическая кнопка" />
+        <Button icon="icon-close" text="Кнопка с иконкой" />
+        <Button icon="arrow-left" iconPosBefore text="Кнопка с иконкой" />
+        <Button mods={['fill']} text="Кнопка с фоном" />
+        <Button mods={['fill']} as="a" href="#" text="Кнопка ссылка" />
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Модалки</h2>
+        <Button text="Стандартная модалка" modal="example" />
+      </section>
+    </Container>
+  </div>
+  <Modal name="example">
+    <h1>Example modal</h1>
+  </Modal>
+</UIKitLayout>
+
+<!--
+  для работы навигации необходимо проставить дата атрибуты:
+  <section data-ui-section>
+    <h2 class="ui__title" data-ui-title>Заголовки</h2>
+    ...
+  </section>
+-->

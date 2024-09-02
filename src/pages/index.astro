@@ -1,0 +1,22 @@
+---
+import Container from '@components/Container/Container'
+import Modal from '@components/Modal/Modal'
+import MainLayout from '@layouts/Main/Main'
+import Picture from '@ui/Picture/Picture'
+---
+
+<MainLayout title="Главная">
+  <Container>
+    <Picture
+      name="mountain"
+      folder="images"
+      alt="Example image"
+      type="jpg"
+      width={1920}
+    />
+    <p>hello</p>
+  </Container>
+
+  <Fragment slot="modals">
+  </Fragment>
+</MainLayout>
