@@ -1,20 +1,20 @@
 ---
 interface Props {
   mods?: string[]
+  className?: string
 }
 
-const { mods, ...props } = Astro.props
+const { mods, className, ...props } = Astro.props
 ---
 
 <div
-  class:list={['accordion', mods?.map((mod) => `accordion--${mod}`)]}
+  class:list={['accordion', mods?.map((mod) => `accordion--${mod}`), className && className]}
   data-accordion="parent"
   {...props}
 >
   <slot />
   <script>
-    import { Accordions } from './accordions'
-    let accordions = new Accordions()
-    accordions.init()
+    import { initAccordions } from './Accordion'
+    initAccordions()
   </script>
 </div>
