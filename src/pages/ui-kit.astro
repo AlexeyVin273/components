@@ -4,6 +4,9 @@ import Modal from '@components/Modal/Modal'
 import UIKitLayout from '@layouts/UI-kit/UI-kit'
 import Button from '@ui/Button/Button'
 import Title from '@ui/Title/Title'
+import Accordion from '@ui/Accordion/Accordion'
+import AccordionElement from '@ui/Accordion/AccordionElement'
+import Picture from '@ui/Picture/Picture'
 ---
 
 <UIKitLayout>
@@ -34,6 +37,38 @@ import Title from '@ui/Title/Title'
       <section data-ui-section>
         <h2 class="ui__title" data-ui-title>Модалки</h2>
         <Button text="Стандартная модалка" modal="example" />
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Аккордеон</h2>
+        <h3>Простой аккордеон с текстом</h3>
+        <Accordion>
+          <AccordionElement title="Заголовок 1" text="Содержимое 1" />
+          <AccordionElement title="Заголовок 2" text="Содержимое 2" />
+          <AccordionElement title="Заголовок 3" text="Содержимое 3" />
+        </Accordion>
+        <h3>Простой аккордеон с текстом (открыт всегда только один элемент)</h3>
+        <Accordion data-single>
+          <AccordionElement title="Заголовок 1" text="Содержимое 1" />
+          <AccordionElement title="Заголовок 2" text="Содержимое 2" />
+          <AccordionElement title="Заголовок 3" text="Содержимое 3" />
+        </Accordion>
+        <h3>Простой аккордеон с произвольным контентом</h3>
+        <Accordion>
+          <AccordionElement title="Заголовок 1">
+            <p>Содержимое 1</p>
+            <Button text="Кнопка" />
+          </AccordionElement>
+          <AccordionElement title="Изображение">
+            <Picture
+              name="mountain"
+              folder="images"
+              alt="Example image"
+              type="jpg"
+              width={360}
+            />
+          </AccordionElement>
+          <AccordionElement title="Заголовок 3" text="Содержимое 3" />
+        </Accordion>
       </section>
     </Container>
   </div>
