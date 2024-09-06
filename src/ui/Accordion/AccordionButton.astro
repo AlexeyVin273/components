@@ -1,0 +1,16 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  text: string
+}
+
+const { text } = Astro.props
+---
+
+<button class="accordion__button" data-accordion="button">
+  <span class="accordion__button-text" set:html={text} />
+  <span class="accordion__arrow">
+    <Icon name={'arrow-down'} />
+  </span>
+</button>

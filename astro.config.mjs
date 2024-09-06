@@ -1,4 +1,4 @@
-import { defineConfig, squooshImageService } from 'astro/config'
+import { defineConfig } from 'astro/config'
 import viteSassGlob from 'vite-plugin-sass-glob-import'
 import icon from 'astro-icon'
 
@@ -33,9 +33,6 @@ export default defineConfig({
     assets: 'assets', // собирает скрипты и стили в папку dist/assets
     assetsPrefix: '.' // добавляет `.` в пути скриптов и стилей
     // inlineStylesheets: 'never', // запрещает инлайн стилей
-  },
-  image: {
-    service: squooshImageService()
   },
   integrations: [
     icon({
