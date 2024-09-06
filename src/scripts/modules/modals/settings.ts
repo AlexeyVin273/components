@@ -20,7 +20,7 @@ interface IModalSettingsGroup {
 }
 
 export const modalSettings: IModalSettingsGroup = {
-  'default': {
+  default: {
     preventDefault: true,
     stopPlay: true,
     lockFocus: true,
@@ -32,11 +32,13 @@ export const modalSettings: IModalSettingsGroup = {
     closeCallback: null
   },
   // Удалите перед стартом проекта
-  'sample': {
+  sample: {
     preventDefault: false,
     // eslint-disable-next-line no-console
-    openCallback: () => console.log('Я отработала при открытии модального окна'),
+    openCallback: () =>
+      console.log('Я отработала при открытии модального окна'),
     // eslint-disable-next-line no-console
-    closeCallback: () => console.log('Я отработала при закрытии модального окна'),
+    closeCallback: () =>
+      console.log('Я отработала при закрытии модального окна')
   }
 }

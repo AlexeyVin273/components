@@ -7,8 +7,8 @@ import type { ModalSettings } from './settings'
  * Represents an item in the modals stack.
  */
 interface ModalsStackItem {
-  modalName: string;
-  settings: ModalSettings;
+  modalName: string
+  settings: ModalSettings
 }
 
 let currentSettings: ModalSettings = {}
@@ -30,7 +30,9 @@ function initTriggers(): void {
   const triggers = document.querySelectorAll('[data-open-modal]')
   triggers.forEach((trigger) => {
     trigger.addEventListener('click', (event) => {
-      const target = (event.target as HTMLElement).closest('[data-open-modal]') as HTMLElement
+      const target = (event.target as HTMLElement).closest(
+        '[data-open-modal]'
+      ) as HTMLElement
       const modalName = target.dataset.openModal
 
       if (modalName) {
@@ -77,7 +79,9 @@ function removeListeners(modal: HTMLElement): void {
  * @param { MouseEvent } event - The click event.
  */
 function onModalClickHandler(event: MouseEvent): void {
-  const closeTrigger = (event.target as HTMLElement).closest('[data-close-modal]') as HTMLElement
+  const closeTrigger = (event.target as HTMLElement).closest(
+    '[data-close-modal]'
+  ) as HTMLElement
 
   if (!closeTrigger) {
     return
@@ -105,7 +109,9 @@ function onModalKeyboardHandler(event: KeyboardEvent): void {
  */
 function stopInteractive(modal: HTMLElement): void {
   if (currentSettings.stopPlay) {
-    modal.querySelectorAll('video, audio').forEach((el: HTMLVideoElement | HTMLAudioElement) => el.pause())
+    modal
+      .querySelectorAll('video, audio')
+      .forEach((el: HTMLVideoElement | HTMLAudioElement) => el.pause())
     modal.querySelectorAll('iframe').forEach((el: HTMLIFrameElement) => {
       el.contentWindow.postMessage(
         '{"event": "command", "func": "pauseVideo", "args": ""}',
@@ -128,7 +134,9 @@ function autoPlay(modal: HTMLElement): void {
       '*'
     )
 
-    const media = el.querySelector('video, audio') as HTMLVideoElement | HTMLAudioElement
+    const media = el.querySelector('video, audio') as
+      | HTMLVideoElement
+      | HTMLAudioElement
     media?.play()
   })
 }
@@ -139,7 +147,9 @@ function autoPlay(modal: HTMLElement): void {
  * @param { ModalSettings } settings - Optional. The settings for the modal. If not provided, modalSettings from settings.ts will be used.
  */
 function openModal(modalName: string, settings: ModalSettings = {}): void {
-  const modal = document.querySelector(`[data-modal="${modalName}"]`) as HTMLElement
+  const modal = document.querySelector(
+    `[data-modal="${modalName}"]`
+  ) as HTMLElement
 
   if (!modal || modal.classList.contains('is-active')) {
     return
@@ -196,7 +206,9 @@ function closeModalImpl(
   clearStack: boolean = true,
   checkModalBack: boolean = true
 ): void {
-  const modal = document.querySelector(`[data-modal="${modalName}"]`) as HTMLElement
+  const modal = document.querySelector(
+    `[data-modal="${modalName}"]`
+  ) as HTMLElement
 
   if (!modal || !modal.classList.contains('is-active')) {
     return
