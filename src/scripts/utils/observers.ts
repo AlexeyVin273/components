@@ -7,15 +7,17 @@ export class EventObserver {
     this.#observers = []
   }
 
-  subscribe(fn: Function) : void {
+  subscribe(fn: Function): void {
     this.#observers.push(fn)
   }
 
-  unsubscribe(fn: Function) : void {
-    this.#observers = this.#observers.filter((subscriber: Function) => subscriber !== fn)
+  unsubscribe(fn: Function): void {
+    this.#observers = this.#observers.filter(
+      (subscriber: Function) => subscriber !== fn
+    )
   }
 
-  fire(data: any) : void {
+  fire(data: any): void {
     this.#observers.forEach((subscriber) => subscriber(data))
   }
 }

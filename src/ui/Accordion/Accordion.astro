@@ -8,7 +8,11 @@ const { mods, className, ...props } = Astro.props
 ---
 
 <div
-  class:list={['accordion', mods?.map((mod) => `accordion--${mod}`), className && className]}
+  class:list={[
+    'accordion',
+    mods?.map((mod) => `accordion--${mod}`),
+    className && className
+  ]}
   data-accordion="parent"
   {...props}
 >

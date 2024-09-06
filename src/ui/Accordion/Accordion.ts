@@ -1,16 +1,15 @@
-
 import { resizeObserver } from 'src/scripts/utils/observers'
 import { debounce, type DebounceCallback } from 'src/scripts/utils/debounce'
 
 let windowWidth = window.innerWidth
 
-function initAccordions() : void {
+function initAccordions(): void {
   document.addEventListener('click', onClickHandler)
   resizeObserver.subscribe(() => debounce(onResizeHandler, 50))
   fullUpdate()
 }
 
-function onClickHandler(event: MouseEvent) : void {
+function onClickHandler(event: MouseEvent): void {
   const target = event.target as HTMLElement
 
   if (!target.closest('[data-accordion="button"]')) {
@@ -36,7 +35,7 @@ function onClickHandler(event: MouseEvent) : void {
   openAccordion(element)
 }
 
-function onResizeHandler() : DebounceCallback {
+function onResizeHandler(): DebounceCallback {
   if (windowWidth === window.innerWidth) {
     return
   }
@@ -47,9 +46,14 @@ function onResizeHandler() : DebounceCallback {
 
 onResizeHandler.timerId = null
 
-function fullUpdate(parent: HTMLElement = null, transition: boolean = false) : void {
+function fullUpdate(
+  parent: HTMLElement = null,
+  transition: boolean = false
+): void {
   // eslint-disable-next-line no-undef
-  let activeElements: NodeListOf<HTMLElement> = (parent ?? document).querySelectorAll('[data-accordion="element"].is-active')
+  let activeElements: NodeListOf<HTMLElement> = (
+    parent ?? document
+  ).querySelectorAll('[data-accordion="element"].is-active')
 
   activeElements.forEach((element) => {
     const innerParent = element.querySelector('[data-accordion="parent"]')
@@ -62,9 +66,17 @@ function fullUpdate(parent: HTMLElement = null, transition: boolean = false) : v
   updateAccordionsHeight()
 }
 
-function openAccordion(element: HTMLElement, transition: boolean = true, childHeight: number = 0) : void {
-  const parentElement = element.closest('[data-accordion="parent"]') as HTMLElement
-  const contentElement = element.querySelector('[data-accordion="content"]') as HTMLElement
+function openAccordion(
+  element: HTMLElement,
+  transition: boolean = true,
+  childHeight: number = 0
+): void {
+  const parentElement = element.closest(
+    '[data-accordion="parent"]'
+  ) as HTMLElement
+  const contentElement = element.querySelector(
+    '[data-accordion="content"]'
+  ) as HTMLElement
   const openHeight = contentElement.scrollHeight + childHeight
 
   if (parentElement.hasAttribute('data-single')) {
@@ -80,15 +92,22 @@ function openAccordion(element: HTMLElement, transition: boolean = true, childHe
     }, 10)
   }
 
-  const topLevelElement = parentElement.closest('[data-accordion="element"]') as HTMLElement
+  const topLevelElement = parentElement.closest(
+    '[data-accordion="element"]'
+  ) as HTMLElement
   if (topLevelElement) {
     openAccordion(topLevelElement, transition, openHeight)
     return
   }
 }
 
-function closeAccordion(element: HTMLElement, transition: boolean = true) : void {
-  const contentElement = element.querySelector('[data-accordion="content"]') as HTMLElement
+function closeAccordion(
+  element: HTMLElement,
+  transition: boolean = true
+): void {
+  const contentElement = element.querySelector(
+    '[data-accordion="content"]'
+  ) as HTMLElement
   if (!contentElement) {
     return
   }
@@ -103,7 +122,7 @@ function closeAccordion(element: HTMLElement, transition: boolean = true) : void
   }
 }
 
-function closeAllAccordions(parent: HTMLElement) : void {
+function closeAllAccordions(parent: HTMLElement): void {
   const elements = parent.querySelectorAll('[data-accordion="element"]')
   elements.forEach((element: HTMLElement) => {
     const currentParent = element.closest('[data-accordion="parent"]')
@@ -113,9 +132,11 @@ function closeAllAccordions(parent: HTMLElement) : void {
   })
 }
 
-function updateAccordionsHeight(element : HTMLElement = null) : void {
+function updateAccordionsHeight(element: HTMLElement = null): void {
   if (element) {
-    const content = element.querySelector('[data-accordion="content"]') as HTMLElement
+    const content = element.querySelector(
+      '[data-accordion="content"]'
+    ) as HTMLElement
     content.style.transition = 'none'
     content.style.maxHeight = `${content.scrollHeight}px`
     setTimeout(() => {
@@ -129,8 +150,12 @@ function updateAccordionsHeight(element : HTMLElement = null) : void {
   )
 
   closedElements.forEach((closedElement: HTMLElement) => {
-    const parent = closedElement.closest('[data-accordion="parent"]') as HTMLElement
-    const content = closedElement.querySelector('[data-accordion="content"]') as HTMLElement
+    const parent = closedElement.closest(
+      '[data-accordion="parent"]'
+    ) as HTMLElement
+    const content = closedElement.querySelector(
+      '[data-accordion="content"]'
+    ) as HTMLElement
     if (
       parent.dataset.destroy &&
       !window.matchMedia(parent.dataset.destroy).matches
@@ -145,8 +170,12 @@ function updateAccordionsHeight(element : HTMLElement = null) : void {
     '[data-accordion="element"].is-active'
   )
   activeElements.forEach((activeElement) => {
-    const content = activeElement.querySelector('[data-accordion="content"]') as HTMLElement
-    const parent = activeElement.closest('[data-accordion="parent"]') as HTMLElement
+    const content = activeElement.querySelector(
+      '[data-accordion="content"]'
+    ) as HTMLElement
+    const parent = activeElement.closest(
+      '[data-accordion="parent"]'
+    ) as HTMLElement
     if (
       parent.dataset.destroy &&
       !window.matchMedia(parent.dataset.destroy).matches
@@ -160,7 +189,9 @@ function updateAccordionsHeight(element : HTMLElement = null) : void {
       content.style.transition = null
     })
 
-    const topLevelElement = parent.closest('[data-accordion="element"]') as HTMLElement
+    const topLevelElement = parent.closest(
+      '[data-accordion="element"]'
+    ) as HTMLElement
     if (topLevelElement) {
       setTimeout(() => {
         openAccordion(topLevelElement, false)
