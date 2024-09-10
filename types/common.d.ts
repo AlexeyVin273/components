@@ -4,5 +4,7 @@ export type FocusLockType = ReturnType<typeof FocusLock>
 declare global {
   export interface Window {
     initAccordions: () => void
+    initTabs: () => void
+    reInitTabs: () => void
   }
 }

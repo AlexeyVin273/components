@@ -7,6 +7,8 @@ import Title from '@ui/Title/Title'
 import Accordion from '@ui/Accordion/Accordion'
 import AccordionElement from '@ui/AccordionElement/AccordionElement'
 import Picture from '@ui/Picture/Picture'
+import Tabs from '@ui/Tabs/Tabs'
+import TabElement from '@ui/Tabs/TabElement/TabElement'
 ---
 
 <UIKitLayout>
@@ -119,6 +121,101 @@ import Picture from '@ui/Picture/Picture'
             </Accordion>
           </AccordionElement>
         </Accordion>
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Табы</h2>
+        <h3>Простые табы</h3>
+        <Tabs
+          controls={{
+            list: [
+              { text: 'Страница таба 1', isActive: true },
+              { text: 'Страница таба 2' },
+              { text: 'Страница таба 3' }
+            ]
+          }}
+        >
+          <TabElement>
+            <p>Содержимое таба 1</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 2</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 3</p>
+          </TabElement>
+        </Tabs>
+        <h3>Табы, на мобильном аккордеон</h3>
+        <Tabs
+          controls={{
+            list: [
+              { text: 'Страница таба 1', isActive: true },
+              { text: 'Страница таба 2' },
+              { text: 'Страница таба 3' }
+            ]
+          }}
+          data-accordion-media="(max-width: 767px)"
+          data-single
+        >
+          <TabElement>
+            <p>Содержимое таба 1</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 2</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 3</p>
+          </TabElement>
+        </Tabs>
+        <h3>Табы, на планшете аккордеон</h3>
+        <Tabs
+          controls={{
+            list: [
+              { text: 'Страница таба 1', isActive: true },
+              { text: 'Страница таба 2' },
+              { text: 'Страница таба 3' }
+            ]
+          }}
+          data-accordion-media="(min-width: 768px) and (max-width: 1023px)"
+          data-single
+        >
+          <TabElement>
+            <p>Содержимое таба 1</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 2</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 3</p>
+          </TabElement>
+        </Tabs>
+        <h3>Табы с аккордеонами</h3>
+        <Tabs
+          controls={{
+            list: [
+              { text: 'Страница таба 1', isActive: true },
+              { text: 'Страница таба 2' },
+              { text: 'Страница таба 3' }
+            ]
+          }}
+        >
+          <TabElement>
+            <Accordion>
+              <AccordionElement
+                title="Заголовок 1"
+                text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi."
+              />
+            </Accordion>
+          </TabElement>
+          <TabElement>
+            <Accordion>
+              <AccordionElement title="Заголовок 2" text="Содержимое 2" />
+              <AccordionElement title="Заголовок 3" text="Содержимое 3" />
+            </Accordion>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 3</p>
+          </TabElement>
+        </Tabs>
       </section>
     </Container>
   </div>
