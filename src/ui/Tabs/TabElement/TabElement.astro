@@ -7,6 +7,10 @@ interface Props {
 const { className, forLoad, ...props } = Astro.props
 ---
 
-<div class:list={['tab-element', className, forLoad && 'for-load']} data-tabs="element" {...props} >
+<div
+  class:list={['tab-element', className, forLoad && 'for-load']}
+  data-tabs="element"
+  {...props}
+>
   <slot />
 </div>

@@ -7,12 +7,12 @@ interface TabElement extends HTMLElement {
   accordionListener?: boolean
 }
 
-function initTabs() : void {
+function initTabs(): void {
   initAllTabs()
   document.addEventListener('click', onClickHandler)
 }
 
-const resizeObserver = function getResizeObserver() : ResizeObserver {
+const resizeObserver = (function getResizeObserver(): ResizeObserver {
   return new ResizeObserver((entries) => {
     for (let entry of entries) {
       if (entry.target.classList.contains('is-active')) {
@@ -20,9 +20,9 @@ const resizeObserver = function getResizeObserver() : ResizeObserver {
       }
     }
   })
-}()
+})()
 
-function onClickHandler(event: MouseEvent) : void {
+function onClickHandler(event: MouseEvent): void {
   const target = event.target as HTMLElement
   if (!target.closest('[data-tabs="control"]')) {
     return
@@ -34,7 +34,9 @@ function onClickHandler(event: MouseEvent) : void {
   const control = target.closest('[data-tabs="control"]') as HTMLElement
   openTab(control)
 
-  const controlsItem = control.closest('[data-tabs="controls-item"]') as HTMLElement
+  const controlsItem = control.closest(
+    '[data-tabs="controls-item"]'
+  ) as HTMLElement
   const controlsList = control.closest('[data-tabs="controls"]') as HTMLElement
   if (controlsList && controlsItem) {
     const offset = controlsItem.offsetLeft
@@ -45,7 +47,7 @@ function onClickHandler(event: MouseEvent) : void {
   }
 }
 
-function initAllTabs() : void {
+function initAllTabs(): void {
   const tabs = document.querySelectorAll('[data-tabs="parent"]')
   const forLoadTabs = document.querySelectorAll(
     '[data-tabs="element"].for-load'
@@ -58,7 +60,10 @@ function initAllTabs() : void {
   })
 }
 
-function removeAllActiveClasses(tabControlElements: HTMLElement[], tabElements: HTMLElement[]) : void {
+function removeAllActiveClasses(
+  tabControlElements: HTMLElement[],
+  tabElements: HTMLElement[]
+): void {
   tabElements.forEach((tab) => {
     tab.classList.remove('is-active')
   })
@@ -76,7 +81,7 @@ function setTabStartState(
   tabContentElement: HTMLElement,
   tabControlElements: HTMLElement[],
   dataDelay: number
-) : void {
+): void {
   const activeIndex = returnActiveIndex(tabControlElements)
   const blockHeight =
     dataHeight === 'max'
@@ -96,7 +101,7 @@ function setTabStartState(
   }, dataDelay)
 }
 
-function returnActiveIndex(tabControlElements: HTMLElement[]) : number {
+function returnActiveIndex(tabControlElements: HTMLElement[]): number {
   let activeIndex = 0
   let flag = true
 
@@ -110,7 +115,7 @@ function returnActiveIndex(tabControlElements: HTMLElement[]) : number {
   return activeIndex
 }
 
-function returnMaxHeight(tabElements: HTMLElement[]) : number {
+function returnMaxHeight(tabElements: HTMLElement[]): number {
   let height = []
   tabElements.forEach((element) => {
     height.push(element.offsetHeight)
@@ -119,7 +124,10 @@ function returnMaxHeight(tabElements: HTMLElement[]) : number {
   return height[height.length - 1]
 }
 
-function returnScopeList(nodeList: NodeListOf<HTMLElement>, parent: HTMLElement) : HTMLElement[] {
+function returnScopeList(
+  nodeList: NodeListOf<HTMLElement>,
+  parent: HTMLElement
+): HTMLElement[] {
   const array = []
   nodeList.forEach((element) => {
     const elementParent = element.closest('[data-tabs="parent"]')
@@ -131,7 +139,10 @@ function returnScopeList(nodeList: NodeListOf<HTMLElement>, parent: HTMLElement)
   return array
 }
 
-function returnScopeChild(nodeList: NodeListOf<HTMLElement>, parent: HTMLElement) : HTMLElement {
+function returnScopeChild(
+  nodeList: NodeListOf<HTMLElement>,
+  parent: HTMLElement
+): HTMLElement {
   let currentChild: HTMLElement
   nodeList.forEach((element) => {
     const elementParent = element.closest('[data-tabs="parent"]')
@@ -143,7 +154,7 @@ function returnScopeChild(nodeList: NodeListOf<HTMLElement>, parent: HTMLElement
   return currentChild
 }
 
-function updateTabHeight() : void {
+function updateTabHeight(): void {
   const activeElements = document.querySelectorAll(
     '[data-tabs="element"].is-active'
   )
@@ -157,7 +168,7 @@ function updateTabHeight() : void {
   })
 }
 
-function setTabElementHeight(element: HTMLElement, transition: boolean) : void {
+function setTabElementHeight(element: HTMLElement, transition: boolean): void {
   const parentElement = element.closest('[data-tabs="parent"]') as HTMLElement
   const dataHeight = parentElement.dataset.height
   const contentElement = returnScopeChild(
@@ -189,7 +200,10 @@ function setTabElementHeight(element: HTMLElement, transition: boolean) : void {
   setTimeout(() => parentElement.classList.remove('no-transition'))
 }
 
-function createDOMElement(elementType: string, attributes: Attributes) : HTMLElement {
+function createDOMElement(
+  elementType: string,
+  attributes: Attributes
+): HTMLElement {
   const element = document.createElement(elementType) as HTMLElement
   for (let key in attributes) {
     if (attributes.hasOwnProperty(key)) {
@@ -200,7 +214,10 @@ function createDOMElement(elementType: string, attributes: Attributes) : HTMLEle
   return element
 }
 
-function toggleAndRemoveClass(element: HTMLElement, accordion: HTMLElement) : void {
+function toggleAndRemoveClass(
+  element: HTMLElement,
+  accordion: HTMLElement
+): void {
   accordion.classList.toggle(
     'is-active',
     element.classList.contains('is-active')
@@ -208,7 +225,11 @@ function toggleAndRemoveClass(element: HTMLElement, accordion: HTMLElement) : vo
   element.classList.remove('is-active')
 }
 
-function setAccordionState(parent: HTMLElement, elements: HTMLElement[], controls: HTMLElement[]) : void {
+function setAccordionState(
+  parent: HTMLElement,
+  elements: HTMLElement[],
+  controls: HTMLElement[]
+): void {
   if (parent.hasAttribute('data-accordion-init')) {
     return
   }
@@ -243,7 +264,11 @@ function setAccordionState(parent: HTMLElement, elements: HTMLElement[], control
   })
 }
 
-function removeAccordionState(parent: HTMLElement, elements: HTMLElement[], controls: HTMLElement[]) : void {
+function removeAccordionState(
+  parent: HTMLElement,
+  elements: HTMLElement[],
+  controls: HTMLElement[]
+): void {
   if (!parent.hasAttribute('data-accordion-init')) {
     return
   }
@@ -285,7 +310,12 @@ function removeAccordionState(parent: HTMLElement, elements: HTMLElement[], cont
   activeElement.classList.add('is-active')
 }
 
-function accordionBreakpointChecker(media: MediaQueryList, parent: HTMLElement, elements: HTMLElement[], controls: HTMLElement[]) : void {
+function accordionBreakpointChecker(
+  media: MediaQueryList,
+  parent: HTMLElement,
+  elements: HTMLElement[],
+  controls: HTMLElement[]
+): void {
   if (media.matches) {
     setAccordionState(parent, elements, controls)
   } else {
@@ -293,10 +323,12 @@ function accordionBreakpointChecker(media: MediaQueryList, parent: HTMLElement, 
   }
 }
 
-function initTab(tab: TabElement) : void {
+function initTab(tab: TabElement): void {
   const dataHeight = tab.dataset.height
   const dataDelay = tab.dataset.delay ? parseInt(tab.dataset.delay, 10) : 0
-  const tabContentElement = tab.querySelector('[data-tabs="content"]') as HTMLElement
+  const tabContentElement = tab.querySelector(
+    '[data-tabs="content"]'
+  ) as HTMLElement
   const tabControlElements = returnScopeList(
     tab.querySelectorAll('[data-tabs="control"]'),
     tab
@@ -323,17 +355,14 @@ function initTab(tab: TabElement) : void {
       tabElements,
       tabControlElements
     )
-    accordionMedia.addEventListener(
-      'change',
-      () => {
-        accordionBreakpointChecker(
-          accordionMedia,
-          tab,
-          tabElements,
-          tabControlElements
-        )
-      }
-    )
+    accordionMedia.addEventListener('change', () => {
+      accordionBreakpointChecker(
+        accordionMedia,
+        tab,
+        tabElements,
+        tabControlElements
+      )
+    })
     tab.accordionListener = true
   }
   if (dataHeight !== 'unset') {
@@ -350,7 +379,7 @@ function reInit() {
   initAllTabs()
 }
 
-function toggleAccordion(accordion: HTMLElement) : void {
+function toggleAccordion(accordion: HTMLElement): void {
   if (accordion.classList.contains('is-active')) {
     closeAccordion(accordion)
   } else {
@@ -358,8 +387,10 @@ function toggleAccordion(accordion: HTMLElement) : void {
   }
 }
 
-function openAccordion(accordion: HTMLElement) : void {
-  const parentElement = accordion.closest('[data-accordion-init]') as HTMLElement
+function openAccordion(accordion: HTMLElement): void {
+  const parentElement = accordion.closest(
+    '[data-accordion-init]'
+  ) as HTMLElement
   const accordionWrapper = accordion.querySelector(
     '[data-tabs="accordion-wrapper"]'
   ) as HTMLElement
@@ -372,7 +403,9 @@ function openAccordion(accordion: HTMLElement) : void {
 
   accordion.classList.add('is-active')
 
-  const control = accordion.querySelector('[data-tabs="control"]') as HTMLElement
+  const control = accordion.querySelector(
+    '[data-tabs="control"]'
+  ) as HTMLElement
   control.classList.add('is-active')
 
   setTimeout(() => {
@@ -387,17 +420,19 @@ function openAccordion(accordion: HTMLElement) : void {
   }, 0)
 }
 
-function closeAllAccordion(parent: HTMLElement) : void {
+function closeAllAccordion(parent: HTMLElement): void {
   const elements = parent.querySelectorAll('[data-tabs="accordion"]')
   elements.forEach((element: HTMLElement) => {
-    const currentParent = element.closest('[data-accordion-init]') as HTMLElement
+    const currentParent = element.closest(
+      '[data-accordion-init]'
+    ) as HTMLElement
     if (currentParent === parent && element.classList.contains('is-active')) {
       closeAccordion(element)
     }
   })
 }
 
-function closeAccordion(accordion: HTMLElement) : void {
+function closeAccordion(accordion: HTMLElement): void {
   const accordionWrapper = accordion.querySelector(
     '[data-tabs="accordion-wrapper"]'
   ) as HTMLElement
@@ -405,7 +440,9 @@ function closeAccordion(accordion: HTMLElement) : void {
   accordionWrapper.style.transition = 'none'
   accordionWrapper.style.maxHeight = `${accordionWrapper.scrollHeight}px`
 
-  const control = accordion.querySelector('[data-tabs="control"]') as HTMLElement
+  const control = accordion.querySelector(
+    '[data-tabs="control"]'
+  ) as HTMLElement
   control.classList.remove('is-active')
 
   setTimeout(() => {
@@ -421,7 +458,7 @@ function closeAccordion(accordion: HTMLElement) : void {
   }, 0)
 }
 
-function openTab(control: HTMLElement) : void {
+function openTab(control: HTMLElement): void {
   const currentIndex = control.dataset.index
   const parentElement = control.closest('[data-tabs="parent"]') as HTMLElement
   const accordion = control.closest('[data-tabs="accordion"]') as HTMLElement
@@ -447,7 +484,9 @@ function openTab(control: HTMLElement) : void {
     ? parseInt(parentElement.dataset.delay, 10)
     : 0
   const dataHeight = parentElement.dataset.height
-  const contentElement = parentElement.querySelector('[data-tabs="content"]') as HTMLElement
+  const contentElement = parentElement.querySelector(
+    '[data-tabs="content"]'
+  ) as HTMLElement
   const tabElements = returnScopeList(
     parentElement.querySelectorAll('[data-tabs="element"]'),
     parentElement

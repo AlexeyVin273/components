@@ -10,7 +10,15 @@ export type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
   isActive?: boolean
 }
 
-const { as: Tag = 'button', type, href, text, image, isActive, ...props } = Astro.props
+const {
+  as: Tag = 'button',
+  type,
+  href,
+  text,
+  image,
+  isActive,
+  ...props
+} = Astro.props
 ---
 
 <Tag
