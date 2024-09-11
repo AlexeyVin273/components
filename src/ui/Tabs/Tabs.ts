@@ -74,14 +74,21 @@ function removeAllActiveClasses(
   })
 }
 
-function setTabStartState(
-  tab: HTMLElement,
-  dataHeight: number | string,
-  tabElements: HTMLElement[],
-  tabContentElement: HTMLElement,
-  tabControlElements: HTMLElement[],
-  dataDelay: number
-): void {
+function setTabStartState({
+  tab,
+  dataHeight,
+  tabElements,
+  tabContentElement,
+  tabControlElements,
+  dataDelay
+}: {
+  tab: HTMLElement;
+  dataHeight: number | string;
+  tabElements: HTMLElement[];
+  tabContentElement: HTMLElement;
+  tabControlElements: HTMLElement[];
+  dataDelay: number;
+}): void {
   const activeIndex = returnActiveIndex(tabControlElements)
   const blockHeight =
     dataHeight === 'max'
@@ -225,11 +232,15 @@ function toggleAndRemoveClass(
   element.classList.remove('is-active')
 }
 
-function setAccordionState(
+function setAccordionState({
+  parent,
+  elements,
+  controls
+}: {
   parent: HTMLElement,
   elements: HTMLElement[],
   controls: HTMLElement[]
-): void {
+}): void {
   if (parent.hasAttribute('data-accordion-init')) {
     return
   }
@@ -264,11 +275,15 @@ function setAccordionState(
   })
 }
 
-function removeAccordionState(
+function removeAccordionState({
+  parent,
+  elements,
+  controls
+}: {
   parent: HTMLElement,
   elements: HTMLElement[],
   controls: HTMLElement[]
-): void {
+}): void {
   if (!parent.hasAttribute('data-accordion-init')) {
     return
   }
@@ -310,16 +325,21 @@ function removeAccordionState(
   activeElement.classList.add('is-active')
 }
 
-function accordionBreakpointChecker(
+function accordionBreakpointChecker({
+  media,
+  parent,
+  elements,
+  controls
+}: {
   media: MediaQueryList,
   parent: HTMLElement,
   elements: HTMLElement[],
   controls: HTMLElement[]
-): void {
+}): void {
   if (media.matches) {
-    setAccordionState(parent, elements, controls)
+    setAccordionState({ parent, elements, controls })
   } else {
-    removeAccordionState(parent, elements, controls)
+    removeAccordionState({ parent, elements, controls })
   }
 }
 
@@ -337,42 +357,47 @@ function initTab(tab: TabElement): void {
     tab.querySelectorAll('[data-tabs="element"]'),
     tab
   )
+
   const accordionMedia = tab.getAttribute('data-accordion-media')
     ? window.matchMedia(tab.getAttribute('data-accordion-media'))
     : null
-  setTabStartState(
+
+  setTabStartState({
     tab,
     dataHeight,
     tabElements,
     tabContentElement,
     tabControlElements,
     dataDelay
-  )
+  })
+
   if (accordionMedia && !tab.accordionListener) {
-    accordionBreakpointChecker(
-      accordionMedia,
-      tab,
-      tabElements,
-      tabControlElements
-    )
+    accordionBreakpointChecker({
+      media: accordionMedia,
+      parent: tab,
+      elements: tabElements,
+      controls: tabControlElements
+    })
     accordionMedia.addEventListener('change', () => {
-      accordionBreakpointChecker(
-        accordionMedia,
-        tab,
-        tabElements,
-        tabControlElements
-      )
+      accordionBreakpointChecker({
+        media: accordionMedia,
+        parent: tab,
+        elements: tabElements,
+        controls: tabControlElements
+      })
     })
     tab.accordionListener = true
   }
+
   if (dataHeight !== 'unset') {
     tabElements.forEach((element) => {
       resizeObserver.observe(element)
     })
   }
+
   setTimeout(() => {
     tab.classList.remove('no-transition-global')
-  })
+  }, 10)
 }
 
 function reInit() {
