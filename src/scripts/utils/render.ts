@@ -1,6 +1,12 @@
-type InsertPosition = 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend' | 'prepend' | 'append'
+type InsertPosition =
+  | 'beforebegin'
+  | 'afterbegin'
+  | 'beforeend'
+  | 'afterend'
+  | 'prepend'
+  | 'append'
 
-export const createElement = (template: string) : HTMLElement => {
+export const createElement = (template: string): HTMLElement => {
   const newElement = document.createElement('div')
 
   newElement.innerHTML = template
@@ -8,7 +14,11 @@ export const createElement = (template: string) : HTMLElement => {
   return newElement.firstChild as HTMLElement
 }
 
-export const renderElement = (container: HTMLElement, component: HTMLElement, place: InsertPosition = 'beforeend') : void => {
+export const renderElement = (
+  container: HTMLElement,
+  component: HTMLElement,
+  place: InsertPosition = 'beforeend'
+): void => {
   switch (place) {
     case 'prepend':
       container.prepend(component)

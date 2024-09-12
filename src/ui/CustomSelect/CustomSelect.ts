@@ -15,7 +15,7 @@ interface IOptions {
   insert?: boolean
 }
 
-let activeIndex : number[] | null = []
+let activeIndex: number[] | null = []
 
 function initCustomSelect() {
   document.querySelectorAll('[data-select]').forEach((select: HTMLElement) => {
@@ -25,16 +25,24 @@ function initCustomSelect() {
 }
 
 // eslint-disable-next-line no-undef
-function createMultiString(arr: NodeListOf<Element>) : string {
+function createMultiString(arr: NodeListOf<Element>): string {
   return [...arr].map((element: HTMLElement) => element.innerText).join(', ')
 }
 
-function setSelectActiveState(selectContainer: HTMLElement, isMultiple: boolean, isInsert: boolean) : void {
-  const buttonTextBlock = selectContainer.querySelector('[data-select-text]') as HTMLElement
+function setSelectActiveState(
+  selectContainer: HTMLElement,
+  isMultiple: boolean,
+  isInsert: boolean
+): void {
+  const buttonTextBlock = selectContainer.querySelector(
+    '[data-select-text]'
+  ) as HTMLElement
   const activeItems = selectContainer.querySelectorAll(
     '[data-select-value][aria-selected="true"]'
   )
-  const label = selectContainer.querySelector('[data-select-label]') as HTMLElement
+  const label = selectContainer.querySelector(
+    '[data-select-label]'
+  ) as HTMLElement
   const activeText = createMultiString(activeItems)
 
   buttonTextBlock.style.transition = '0s'
@@ -58,7 +66,7 @@ function setSelectActiveState(selectContainer: HTMLElement, isMultiple: boolean,
   }
 }
 
-function closeSelect() : void {
+function closeSelect(): void {
   const activeSelect = document.querySelector('[data-select].is-open')
   activeSelect?.classList.remove('is-open')
 
@@ -66,14 +74,14 @@ function closeSelect() : void {
   document.removeEventListener('keydown', onEscapePress)
 }
 
-function openSelect(selectContainer: HTMLElement) : void {
+function openSelect(selectContainer: HTMLElement): void {
   selectContainer.classList.add('is-open')
 
   document.addEventListener('click', onDocumentClick)
   document.addEventListener('keydown', onEscapePress)
 }
 
-function handleSelectOptionClick(element: HTMLElement, index: number) : void {
+function handleSelectOptionClick(element: HTMLElement, index: number): void {
   const parentSelect = element.closest('[data-select]') as HTMLElement
   const multiple = parentSelect.hasAttribute('data-multiple')
   const insert = parentSelect.hasAttribute('data-insert')
@@ -85,7 +93,13 @@ function handleSelectOptionClick(element: HTMLElement, index: number) : void {
   }
 
   if (multiple) {
-    toggleMultipleSelection({ parent: parentSelect, element, index, isInsert: insert, options })
+    toggleMultipleSelection({
+      parent: parentSelect,
+      element,
+      index,
+      isInsert: insert,
+      options
+    })
   } else {
     setSingleSelection({ parent: parentSelect, element, index, options })
     closeSelect()
@@ -94,8 +108,22 @@ function handleSelectOptionClick(element: HTMLElement, index: number) : void {
   triggerChangeEvent(parentSelect.querySelector('select'))
 }
 
-function toggleMultipleSelection({ parent, element, index, isInsert, options }: {parent: HTMLElement, element: HTMLElement, index: number, isInsert: boolean, options: HTMLOptionElement[]}) {
-  const buttonTextBlock = parent.querySelector('[data-select-text]') as HTMLElement
+function toggleMultipleSelection({
+  parent,
+  element,
+  index,
+  isInsert,
+  options
+}: {
+  parent: HTMLElement
+  element: HTMLElement
+  index: number
+  isInsert: boolean
+  options: HTMLOptionElement[]
+}) {
+  const buttonTextBlock = parent.querySelector(
+    '[data-select-text]'
+  ) as HTMLElement
 
   const isSelected = element.getAttribute('aria-selected') === 'true'
   element.setAttribute('aria-selected', isSelected ? 'false' : 'true')
@@ -106,7 +134,9 @@ function toggleMultipleSelection({ parent, element, index, isInsert, options }: 
   }
 
   if (isInsert) {
-    const activeItems = parent.querySelectorAll('[data-select-value][aria-selected="true"]')
+    const activeItems = parent.querySelectorAll(
+      '[data-select-value][aria-selected="true"]'
+    )
     const activeText = createMultiString(activeItems)
     buttonTextBlock.innerHTML = activeText
     toggleEmptyState(parent, activeText.length > 0)
@@ -121,9 +151,23 @@ function toggleEmptyState(parent: HTMLElement, hasValue: boolean) {
   }
 }
 
-function setSingleSelection({ parent, element, index, options }: {parent: HTMLElement, element: HTMLElement, index: number, options: HTMLOptionElement[]}) {
-  const buttonTextBlock = parent.querySelector('[data-select-text]') as HTMLElement
-  const activeItem = parent.querySelector('[data-select-value][aria-selected="true"]')
+function setSingleSelection({
+  parent,
+  element,
+  index,
+  options
+}: {
+  parent: HTMLElement
+  element: HTMLElement
+  index: number
+  options: HTMLOptionElement[]
+}) {
+  const buttonTextBlock = parent.querySelector(
+    '[data-select-text]'
+  ) as HTMLElement
+  const activeItem = parent.querySelector(
+    '[data-select-value][aria-selected="true"]'
+  )
   const selectedOption = parent.querySelector('option[selected]')
 
   activeItem?.setAttribute('aria-selected', 'false')
@@ -152,26 +196,32 @@ function onEscapePress(evt: KeyboardEvent) {
   if (evt.key === 'Escape') closeSelect()
 }
 
-function onSelectItemClick(element: HTMLElement, index: number) : void {
+function onSelectItemClick(element: HTMLElement, index: number): void {
   handleSelectOptionClick(element, index)
 }
 
-function onSelectItemKeydown(evt: KeyboardEvent, element: HTMLElement, index: number) : void {
+function onSelectItemKeydown(
+  evt: KeyboardEvent,
+  element: HTMLElement,
+  index: number
+): void {
   const isEnter = evt.key === 'Enter'
   if (isEnter) {
     handleSelectOptionClick(element, index)
   }
 }
 
-function onLastItemKeydown(evt: KeyboardEvent) : void {
+function onLastItemKeydown(evt: KeyboardEvent): void {
   const isTab = evt.key === 'Tab'
   if (isTab) {
     closeSelect()
   }
 }
 
-function onSelectClick(evt: MouseEvent) : void {
-  const select = (evt.target as HTMLElement).closest('[data-select]') as HTMLElement
+function onSelectClick(evt: MouseEvent): void {
+  const select = (evt.target as HTMLElement).closest(
+    '[data-select]'
+  ) as HTMLElement
 
   select.classList.remove('is-invalid')
 
@@ -183,8 +233,10 @@ function onSelectClick(evt: MouseEvent) : void {
   openSelect(select)
 }
 
-function onSelectKeydown(evt: KeyboardEvent) : void {
-  const select = (evt.target as HTMLElement).closest('[data-select]') as HTMLElement
+function onSelectKeydown(evt: KeyboardEvent): void {
+  const select = (evt.target as HTMLElement).closest(
+    '[data-select]'
+  ) as HTMLElement
   select.classList.remove('is-invalid')
 
   if (evt.shiftKey && evt.key === 'Tab' && select.closest('.is-open')) {
@@ -193,7 +245,10 @@ function onSelectKeydown(evt: KeyboardEvent) : void {
 }
 
 // eslint-disable-next-line no-undef
-function setActiveSelectItemsState(multiple: boolean, selectItems: NodeListOf<Element>) : void {
+function setActiveSelectItemsState(
+  multiple: boolean,
+  selectItems: NodeListOf<Element>
+): void {
   let flag = true
   activeIndex = []
   selectItems.forEach((item: HTMLElement, index: number) => {
@@ -212,10 +267,10 @@ function setActiveSelectItemsState(multiple: boolean, selectItems: NodeListOf<El
   })
 }
 
-function createSelectStructure(select: HTMLElement) : void {
+function createSelectStructure(select: HTMLElement): void {
   if (select.querySelector('select')) return
 
-  let options : IOptions = {
+  let options: IOptions = {
     items: [],
     activeIndexes: [],
     name: select.dataset.name || '',
@@ -234,7 +289,7 @@ function createSelectStructure(select: HTMLElement) : void {
   }
 
   selectItems.forEach((selectItem: HTMLElement) => {
-    const itemInfo : IItemInfo = {
+    const itemInfo: IItemInfo = {
       text: selectItem.textContent || '',
       value: selectItem.dataset.selectValue || ''
     }
@@ -246,14 +301,12 @@ function createSelectStructure(select: HTMLElement) : void {
   activeIndex.length = 0
 }
 
-function setSelectAction(item: HTMLElement) : void {
+function setSelectAction(item: HTMLElement): void {
   if (!item) {
     return
   }
   const button = item.querySelector('[data-select-btn]')
-  const selectItems = item.querySelectorAll(
-    '[data-select-value]'
-  )
+  const selectItems = item.querySelectorAll('[data-select-value]')
 
   button.addEventListener('click', onSelectClick)
   button.addEventListener('keydown', onSelectKeydown)
@@ -273,15 +326,29 @@ function setSelectAction(item: HTMLElement) : void {
   })
 }
 
-function createNativeSelectMarkup({ id, name, multiple, required, items, activeIndexes = [] }: IOptions): string {
-  return `<select ${id ? `id="${id}"` : ''} ${name ? `name="${name}"` : ''} ${multiple ? 'multiple' : ''} ${required ? 'required' : ''} tabindex="-1" aria-hidden="true">
+function createNativeSelectMarkup({
+  id,
+  name,
+  multiple,
+  required,
+  items,
+  activeIndexes = []
+}: IOptions): string {
+  return `<select ${id ? `id="${id}"` : ''} ${name ? `name="${name}"` : ''} ${
+    multiple ? 'multiple' : ''
+  } ${required ? 'required' : ''} tabindex="-1" aria-hidden="true">
       <option value=""></option>
-      ${items.map((item, index) => `
-        <option value="${item.value}" ${activeIndexes.includes(index) ? 'selected' : ''}>${item.text}</option>
-      `).join('\n')}
+      ${items
+    .map(
+      (item, index) => `
+        <option value="${item.value}" ${
+  activeIndexes.includes(index) ? 'selected' : ''
+}>${item.text}</option>
+      `
+    )
+    .join('\n')}
     </select>`
 }
-
 
 window.initCustomSelect = initCustomSelect
 
