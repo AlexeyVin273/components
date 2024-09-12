@@ -82,12 +82,12 @@ function setTabStartState({
   tabControlElements,
   dataDelay
 }: {
-  tab: HTMLElement;
-  dataHeight: number | string;
-  tabElements: HTMLElement[];
-  tabContentElement: HTMLElement;
-  tabControlElements: HTMLElement[];
-  dataDelay: number;
+  tab: HTMLElement
+  dataHeight: number | string
+  tabElements: HTMLElement[]
+  tabContentElement: HTMLElement
+  tabControlElements: HTMLElement[]
+  dataDelay: number
 }): void {
   const activeIndex = returnActiveIndex(tabControlElements)
   const blockHeight =
@@ -237,8 +237,8 @@ function setAccordionState({
   elements,
   controls
 }: {
-  parent: HTMLElement,
-  elements: HTMLElement[],
+  parent: HTMLElement
+  elements: HTMLElement[]
   controls: HTMLElement[]
 }): void {
   if (parent.hasAttribute('data-accordion-init')) {
@@ -280,8 +280,8 @@ function removeAccordionState({
   elements,
   controls
 }: {
-  parent: HTMLElement,
-  elements: HTMLElement[],
+  parent: HTMLElement
+  elements: HTMLElement[]
   controls: HTMLElement[]
 }): void {
   if (!parent.hasAttribute('data-accordion-init')) {
@@ -331,9 +331,9 @@ function accordionBreakpointChecker({
   elements,
   controls
 }: {
-  media: MediaQueryList,
-  parent: HTMLElement,
-  elements: HTMLElement[],
+  media: MediaQueryList
+  parent: HTMLElement
+  elements: HTMLElement[]
   controls: HTMLElement[]
 }): void {
   if (media.matches) {

@@ -47,10 +47,10 @@ export default defineConfig({
       cssCodeSplit: false, // css в один файл
       rollupOptions: {
         output: {
-          entryFileNames: 'scripts.js',
+          entryFileNames: 'scripts/scripts.js',
           assetFileNames: (assetInfo) => {
             return assetInfo.name === 'style.css'
-              ? `${assetInfo.name}` // задается имя и папка (корень) для css
+              ? `styles/${assetInfo.name}` // задается имя и папка (корень) для css
               : `assets/${assetInfo.name}` // задается имя и папка картинкам
           }
         }
