@@ -6,7 +6,7 @@
   border-radius: 12px;
 
   &.is-active {
-    .accordion-element__arrow {
+    > .accordion-element__btn .accordion-element__arrow {
       transform: rotate(-179.99deg);
     }
   }
@@ -44,8 +44,8 @@
 
   &__arrow {
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     transform: translateZ(0) rotate(0deg);
     transition: transform $transition;
 

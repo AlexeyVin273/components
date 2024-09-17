@@ -6,5 +6,6 @@ declare global {
     initAccordions: () => void
     initTabs: () => void
     reInitTabs: () => void
+    initCustomSelect: () => void
   }
 }
