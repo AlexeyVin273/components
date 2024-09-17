@@ -244,9 +244,9 @@ function onSelectKeydown(evt: KeyboardEvent): void {
   }
 }
 
-// eslint-disable-next-line no-undef
 function setActiveSelectItemsState(
   multiple: boolean,
+  // eslint-disable-next-line no-undef
   selectItems: NodeListOf<Element>
 ): void {
   let flag = true

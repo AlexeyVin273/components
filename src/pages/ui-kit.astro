@@ -12,6 +12,7 @@ import TabElement from '@ui/Tabs/TabElement/TabElement'
 import CustomInput from '@ui/CustomInput/CustomInput'
 import CustomToggle from '@ui/CustomToggle/CustomToggle'
 import CustomSelect from '@ui/CustomSelect/CustomSelect'
+import UploadFile from '@ui/UploadFile/UploadFile'
 ---
 
 <UIKitLayout>
@@ -363,6 +364,29 @@ import CustomSelect from '@ui/CustomSelect/CustomSelect'
             { text: 'Екатеринбург', value: 'ekaterinburg' }
           ]}
           openup
+        />
+        <h3>Upload file</h3>
+        <h4>Загрузка документа (docx, xslx, pdf) с превью</h4>
+        <UploadFile uploadType="file" btnText="Загрузить файл" name="file-1" />
+        <h4>Загрузка изображения (png, jpg, webp) с превью</h4>
+        <UploadFile uploadType="img" btnText="Загрузить файл" name="file-2" />
+        <h4>Загрузка изображения (png, jpg, webp) с дропзоной</h4>
+        <UploadFile
+          uploadType="img-drop"
+          btnText="Загрузить файл"
+          name="file-3"
+        />
+        <h4>Загрузка документа (docx, xslx, pdf) с дропзоной</h4>
+        <UploadFile
+          uploadType="file-drop"
+          btnText="Загрузить файл"
+          name="file-4"
+        />
+        <h4>Загрузка документа (docx, xslx, pdf) с превью и дропзоной</h4>
+        <UploadFile
+          uploadType="file-drop-preview"
+          btnText="Загрузить файл"
+          name="file-5"
         />
       </section>
     </Container>
