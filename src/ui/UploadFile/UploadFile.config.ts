@@ -28,11 +28,11 @@ const imageUploadOptions: WeekUploadOptions = {
   previewImg: true,
   accept: ['.png', '.jpg', '.jpeg', '.webp'],
   iconFormat: {
-    png: './images/file/icon-file-png.png',
-    jpg: './images/file/icon-file-jpg.png',
-    jpeg: './images/file/icon-file-jpg.png',
-    webp: './images/file/icon-file-webp.png',
-    default: './images/file/icon-file-jpg.png'
+    png: '/images/file/icon-file-png.png',
+    jpg: '/images/file/icon-file-jpg.png',
+    jpeg: '/images/file/icon-file-jpg.png',
+    webp: '/images/file/icon-file-webp.png',
+    default: '/images/file/icon-file-jpg.png'
   }
 }
 
@@ -41,10 +41,10 @@ const fileUploadOptions: WeekUploadOptions = {
   preview: true,
   accept: ['.pdf', '.docx', '.xlsx'],
   iconFormat: {
-    xlsx: './images/file/icon-file-xls.png',
-    docx: './images/file/icon-file-doc.png',
-    pdf: './images/file/icon-file-pdf.png',
-    default: './images/file/icon-file-doc.png'
+    xlsx: '/images/file/icon-file-xls.png',
+    docx: '/images/file/icon-file-doc.png',
+    pdf: '/images/file/icon-file-pdf.png',
+    default: '/images/file/icon-file-doc.png'
   }
 }
 
@@ -59,11 +59,11 @@ const imgDropOptions: WeekUploadOptions = {
     fileSize: false
   },
   iconFormat: {
-    png: './images/file/icon-file-png.png',
-    jpg: './images/file/icon-file-jpg.png',
-    jpeg: './images/file/icon-file-jpg.png',
-    webp: './images/file/icon-file-webp.png',
-    default: './images/file/icon-file-jpg.png'
+    png: '/images/file/icon-file-png.png',
+    jpg: '/images/file/icon-file-jpg.png',
+    jpeg: '/images/file/icon-file-jpg.png',
+    webp: '/images/file/icon-file-webp.png',
+    default: '/images/file/icon-file-jpg.png'
   }
 }
 
@@ -73,10 +73,10 @@ const fileDropOptions: WeekUploadOptions = {
   uploadLength: 4,
   accept: ['.pdf', '.docx', '.xlsx'],
   iconFormat: {
-    xlsx: './images/file/icon-file-xls.png',
-    docx: './images/file/icon-file-doc.png',
-    pdf: './images/file/icon-file-pdf.png',
-    default: './images/file/icon-file-doc.png'
+    xlsx: '/images/file/icon-file-xls.png',
+    docx: '/images/file/icon-file-doc.png',
+    pdf: '/images/file/icon-file-pdf.png',
+    default: '/images/file/icon-file-doc.png'
   }
 }
 
@@ -87,10 +87,10 @@ const fileDropPreviewOptions: WeekUploadOptions = {
   uploadLength: 4,
   accept: ['.pdf', '.docx', '.xlsx'],
   iconFormat: {
-    xlsx: './images/file/icon-file-xls.png',
-    docx: './images/file/icon-file-doc.png',
-    pdf: './images/file/icon-file-pdf.png',
-    default: './images/file/icon-file-doc.png'
+    xlsx: '/images/file/icon-file-xls.png',
+    docx: '/images/file/icon-file-doc.png',
+    pdf: '/images/file/icon-file-pdf.png',
+    default: '/images/file/icon-file-doc.png'
   }
 }
 
